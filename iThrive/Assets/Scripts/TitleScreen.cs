@@ -23,6 +23,7 @@ public class TitleScreen : MonoBehaviour {
     }
     public void Quit()
     {
+        Application.Quit();
         Debug.Break();
     }
 }
