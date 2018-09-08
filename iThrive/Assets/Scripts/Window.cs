@@ -7,9 +7,9 @@ public abstract class Window : MonoBehaviour {
 
     public bool IsCurrentWindow { get; set; }
 
-    protected abstract Action OnStart { get; set; }
+    protected virtual Action OnStart { get; set; }
 
-    protected abstract Action OnUpdate { get; set; }
+    protected virtual Action OnUpdate { get; set; }
 
 	// Use this for initialization
 	void Start ()
@@ -20,23 +20,23 @@ public abstract class Window : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
     {
-		if (IsCurrentWindow)
+		if (this.IsCurrentWindow)
         {
             this.OnUpdate();
         }
 	}
 
-    void Select()
+    public void Select()
     {
         this.IsCurrentWindow = true;
     }
 
-    void UnSelect()
+    public void UnSelect()
     {
         this.IsCurrentWindow = false;
     }
 
-    void Toggle()
+    public void Toggle()
     {
         this.IsCurrentWindow = !this.IsCurrentWindow;
     }
