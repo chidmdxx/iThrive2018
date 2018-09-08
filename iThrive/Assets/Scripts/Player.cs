@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Player : MonoBehaviour {
-    public static float TimeElapsed { get; set; }
+    public static double TimeElapsed { get; set; }
     public static float Energy { get; set; }
     public static Dictionary<string, int> LastInteractions { get; private set; }
     public static GameFlags Flags { get; set; }
@@ -23,14 +23,14 @@ public class Player : MonoBehaviour {
         this.timer += Time.deltaTime;
         if (this.timer > 1f)
         {
-            Player.TimeElapsed++;
+            Player.TimeElapsed += 0.1;
             this.timer = 0f;
         }
     }
 
     public static void Initialize()
     {
-        Player.TimeElapsed = 0;
+        Player.TimeElapsed = 0f;
         Player.Energy = 100;
         Player.Flags = GameFlags.None;
         Player.LastInteractions = new Dictionary<string, int>();
