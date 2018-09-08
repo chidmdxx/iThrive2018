@@ -15,7 +15,6 @@ public abstract class Window : MonoBehaviour {
     {
         this.OnStart();
         var buttons = this.GetComponentsInChildren<Button>();
-        print(buttons.Length);
         this.CloseButton = buttons.First(field => field.name.Equals("CloseButton"));
         this.CloseButton.onClick.AddListener(Close);
     }
