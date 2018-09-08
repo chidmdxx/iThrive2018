@@ -16,10 +16,6 @@ public class Clock : Window {
             {
                 var textFields = this.GetComponentsInChildren<Text>();
                 this.clockText = textFields.First(field => field.name.Equals("Time"));
-                this.closeButton = this.GetComponentInChildren<Button>();
-                this.IsCurrentWindow = true;
-
-                this.closeButton.onClick.AddListener(() => this.TemporaryClose());
             };
         }
     }
@@ -33,10 +29,5 @@ public class Clock : Window {
                 this.clockText.text = DateTime.Now.ToLongTimeString();
             };
         }
-    }
-
-    void TemporaryClose()
-    {
-        this.Toggle();
     }
 }
