@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
 guid: 002bfc14fe0ba394a9ebc1d8f03a855c
+=======
+guid: c4106fe6092cb42d0a203084e9815006
+>>>>>>> Stub for outside scene
 AudioImporter:
   externalObjects: {}
   serializedVersion: 6
