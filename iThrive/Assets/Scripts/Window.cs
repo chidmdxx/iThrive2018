@@ -21,6 +21,7 @@ public abstract class Window : MonoBehaviour, IPointerDownHandler, IDragHandler
     // Use this for initialization
     void Start ()
     {
+        this.gameObject.SetActive(false);
         if (this.OnStart != null)
         {
             this.OnStart();
@@ -62,6 +63,12 @@ public abstract class Window : MonoBehaviour, IPointerDownHandler, IDragHandler
         this.IsCurrentWindow = !this.IsCurrentWindow;
     }
 
+    public void Open()
+    {
+        SoundManager.Instance.PlaySingleSound("click");
+        this.gameObject.SetActive(true);
+    }
+
     public void Close()
     {
         SoundManager.Instance.PlaySingleSound("click");
@@ -69,7 +76,7 @@ public abstract class Window : MonoBehaviour, IPointerDownHandler, IDragHandler
         {
             this.OnClose();
         }
-        UnityEngine.Object.Destroy(this.gameObject);
+        this.gameObject.SetActive(false);
     }
 
     public void OnPointerDown(PointerEventData data)
