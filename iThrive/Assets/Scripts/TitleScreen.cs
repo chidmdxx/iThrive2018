@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class TitleScreen : MonoBehaviour {
     public GameObject titleUI;
     public GameObject playUI;
+    public GameObject pauseUI;
     public Image blackScreen;
     private AudioSource chairRoll;
 
@@ -17,13 +18,27 @@ public class TitleScreen : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
+		if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            //Pause game
+            pauseUI.SetActive(true);
+        }
 	}
 
     public void Play() {
-        Debug.Log("Transition to play cutscene");
         titleUI.SetActive(false);
         StartCoroutine(Fade(playUI));
+    }
+    public void Resume()
+    {
+        pauseUI.SetActive(false);
+        //Change time back to normal
+    }
+    public void MainMenu()
+    {
+        playUI.SetActive(false);
+        pauseUI.SetActive(false);
+        StartCoroutine(Fade(titleUI));
     }
     public void HTP()
     {
@@ -36,6 +51,7 @@ public class TitleScreen : MonoBehaviour {
     }
     IEnumerator Fade(GameObject sceneUI)
     {
+        blackScreen.gameObject.SetActive(true);
         blackScreen.CrossFadeAlpha(1.0f, 2f, true);
         yield return new WaitForSeconds(2f);
         //Play chair rolling back audio clip
@@ -43,6 +59,7 @@ public class TitleScreen : MonoBehaviour {
         blackScreen.CrossFadeAlpha(0.0f, 1f, true);
         yield return new WaitForSeconds(1f);
         sceneUI.SetActive(true);
+        blackScreen.gameObject.SetActive(false);
     }
     public void GoBack()
     {
