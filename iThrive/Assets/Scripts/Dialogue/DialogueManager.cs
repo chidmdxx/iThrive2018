@@ -18,6 +18,10 @@ public class DialogueManager : MonoBehaviour
     public GameObject conversationMineRecent;
     public GameObject conversationTheirsOld;
     public GameObject conversationTheirsRecent;
+    public Image profileImageTheirs;
+    public Sprite spriteGhost;
+    public Sprite spriteConnie;
+    public Sprite spriteFrank;
 
     private Dialogue dialogue;
     private Dialogue dialogueGhost;
@@ -26,11 +30,17 @@ public class DialogueManager : MonoBehaviour
     private string currentCharacter;
     private int nextOption = -1;
     private int ghostCount = 0;
+    private string myLastReplyGhost1 = "";
+    private string myLastReplyGhost2 = "";
+    private string myLastReplyConnie = "";
+    private string myLastReplyFrank = "";
 
     void Start()
     {
         currentCharacter = "Ghost";
         dialogue = Dialogue.dialogueGhost;
+        dialogueConnie = Dialogue.dialogueConnie;
+        dialogueFrank = Dialogue.dialogueFrank;
 
         conversationMineOld.gameObject.SetActive(false);
         conversationMineRecent.gameObject.SetActive(false);
@@ -82,12 +92,16 @@ public class DialogueManager : MonoBehaviour
             {
                 case 1:
                     dialogueMineOldText.text = dialogueMineRecentText.text;
+                    myLastReplyGhost1 = dialogueMineOldText.text;
                     dialogueMineRecentText.text = dialogue.reply1;
+                    myLastReplyGhost2 = dialogueMineRecentText.text;
                     dialogue = Dialogue.dialogueGhost;
                     break;
                 case 2:
                     dialogueMineOldText.text = dialogueMineRecentText.text;
+                    myLastReplyGhost1 = dialogueMineOldText.text;
                     dialogueMineRecentText.text = dialogue.reply2;
+                    myLastReplyGhost2 = dialogueMineRecentText.text;
                     dialogue = Dialogue.dialogueGhost;
                     break;
                 default:
@@ -113,6 +127,15 @@ public class DialogueManager : MonoBehaviour
                 break;
             default:
                 return;
+        }
+
+        switch (currentCharacter){
+            case "Connie":
+                myLastReplyConnie = dialogueMineOldText.text;
+                break;
+            case "Frank":
+                myLastReplyFrank = dialogueMineOldText.text;
+                break;
         }
 
         if (dialogue == null)
@@ -164,14 +187,71 @@ public class DialogueManager : MonoBehaviour
         {
             case "Ghost":
                 dialogue = dialogueGhost;
-                break;
+                profileImageTheirs.sprite = spriteGhost;
+
+                if (ghostCount == 0){
+                    conversationMineOld.gameObject.SetActive(false);
+                    conversationMineRecent.gameObject.SetActive(false);
+                    conversationTheirsOld.gameObject.SetActive(false);
+                    conversationTheirsRecent.gameObject.SetActive(false);
+                    option1Text.text = dialogue.reply1;
+                    option2Text.text = dialogue.reply2;
+                }
+                else if (ghostCount == 1)
+                {
+                    conversationMineOld.gameObject.SetActive(false);
+                    conversationMineRecent.gameObject.SetActive(true);
+                    conversationTheirsOld.gameObject.SetActive(false);
+                    conversationTheirsRecent.gameObject.SetActive(false);
+                    option1Text.text = dialogue.reply1;
+                    option2Text.text = dialogue.reply2;
+                    dialogueMineRecentText.text = myLastReplyGhost2;
+                }
+                else if (ghostCount <=10){
+                    conversationMineOld.gameObject.SetActive(true);
+                    conversationMineRecent.gameObject.SetActive(true);
+                    conversationTheirsOld.gameObject.SetActive(false);
+                    conversationTheirsRecent.gameObject.SetActive(false);
+                    dialogueMineOldText.text = myLastReplyGhost1;
+                    dialogueMineRecentText.text = myLastReplyGhost2;
+                    option1Text.text = dialogue.reply1;
+                    option2Text.text = dialogue.reply2;
+                }
+                else{
+                    conversationMineOld.gameObject.SetActive(true);
+                    conversationMineRecent.gameObject.SetActive(false);
+                    conversationTheirsOld.gameObject.SetActive(false);
+                    conversationTheirsRecent.gameObject.SetActive(true);
+                    dialogueMineOldText.text = myLastReplyGhost1;
+                    dialogueTheirsRecentText.text = "New phone who dis";
+                }
+                return;
             case "Connie":
                 dialogue = dialogueConnie;
+                profileImageTheirs.sprite = spriteConnie;
+                dialogueMineRecentText.text = dialogue.theirText;
+                dialogueMineOldText.text = myLastReplyConnie;
+                conversationMineOld.gameObject.SetActive(!myLastReplyConnie.Equals(""));
                 break;
             case "Frank":
                 dialogue = dialogueFrank;
+                profileImageTheirs.sprite = spriteFrank;
+                dialogueMineRecentText.text = dialogue.theirText;
+                dialogueMineOldText.text = myLastReplyFrank;
+                conversationMineOld.gameObject.SetActive(!myLastReplyFrank.Equals(""));
                 break;
         }
+
+        option1Button.gameObject.SetActive(true);
+        option2Button.gameObject.SetActive(true);
+        option1Text.text = dialogue.reply1;
+        option2Text.text = dialogue.reply2;
+        conversationMineRecent.gameObject.SetActive(false);
+        conversationTheirsOld.gameObject.SetActive(false);
+        conversationTheirsRecent.gameObject.SetActive(true);
+
+        dialogueTheirsRecentText.text = dialogue.theirText;
+        dialogueMineOldText.text = dialogue.myText;
 
         currentCharacter = character;
         Debug.Log("Current character is " + character);

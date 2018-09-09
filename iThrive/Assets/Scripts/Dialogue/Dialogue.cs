@@ -20,4 +20,56 @@ public class Dialogue {
             option1 = null,
             option2 = null
         };
+
+    public static Dialogue dialogueConnie = new Dialogue
+    {
+        theirText = "Hey, want to grab coffee?",
+        myText = "",
+        reply1 = "Yes",
+        reply2 = "No",
+        option1 = new Dialogue
+        {
+            theirText = "Cool!",
+            myText = "",
+            reply1 = "",
+            reply2 = "",
+            option1 = null,
+            option2 = null
+        },
+        option2 = new Dialogue
+        {
+            theirText = "Bummer",
+            myText = "",
+            reply1 = "",
+            reply2 = "",
+            option1 = null,
+            option2 = null
+        }
+    };
+
+    public static Dialogue dialogueFrank = new Dialogue
+    {
+        theirText = "Hey, want to grab tea?",
+        myText = "",
+        reply1 = "Yes tea",
+        reply2 = "No tea",
+        option1 = new Dialogue
+        {
+            theirText = "Cool tea!",
+            myText = "",
+            reply1 = "",
+            reply2 = "",
+            option1 = null,
+            option2 = null
+        },
+        option2 = new Dialogue
+        {
+            theirText = "Bummer tea",
+            myText = "",
+            reply1 = "",
+            reply2 = "",
+            option1 = null,
+            option2 = null
+        }
+    };
 }
