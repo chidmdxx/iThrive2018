@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[System.Serializable]
 public class Dialogue {
-   
-    [TextArea(1, 5)]
-    public string[] sentences;
 
+    public string theirText;
+    public string myText;
+    public string reply1;
+    public string reply2;
+    public Dialogue option1;
+    public Dialogue option2;
 }
