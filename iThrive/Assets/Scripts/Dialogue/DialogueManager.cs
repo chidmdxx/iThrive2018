@@ -15,10 +15,15 @@ public class DialogueManager : MonoBehaviour
     public GameObject conversationMine;
 
     private Dialogue dialogue;
+    private Dialogue dialogueGhost;
+    private Dialogue dialogueConnie;
+    private Dialogue dialogueFrank;
+    private string currentCharacter;
     private int nextOption = -1;
 
     void Start()
     {
+        currentCharacter = "Ghost";
         dialogue = new Dialogue
         {
             theirText = "Want some coffee?",
@@ -51,6 +56,7 @@ public class DialogueManager : MonoBehaviour
 
     public void DisplayNextSentence()
     {
+        SoundManager.Instance.PlaySingleSound("Click");
         switch (nextOption)
         {
             case 1:
@@ -80,6 +86,7 @@ public class DialogueManager : MonoBehaviour
     }
 
     public void SelectNextOption(int option){
+        SoundManager.Instance.PlaySingleSound("Click");
         nextOption = option;
         option1Button.gameObject.SetActive(false);
         option2Button.gameObject.SetActive(false);
@@ -93,6 +100,37 @@ public class DialogueManager : MonoBehaviour
                 break;
         }
         Debug.Log("Next option is " + option);
+    }
+
+    public void SelectConversation(string character){
+        switch (currentCharacter)
+        {
+            case "Ghost":
+                dialogueGhost = dialogue;
+                break;
+            case "Connie":
+                dialogueConnie = dialogue;
+                break;
+            case "Frank":
+                dialogueFrank = dialogue;
+                break;
+        }
+
+        switch (character)
+        {
+            case "Ghost":
+                dialogue = dialogueGhost;
+                break;
+            case "Connie":
+                dialogue = dialogueConnie;
+                break;
+            case "Frank":
+                dialogue = dialogueFrank;
+                break;
+        }
+
+        currentCharacter = character;
+        Debug.Log("Current character is " + character);
     }
 
     void EndDialogue()
