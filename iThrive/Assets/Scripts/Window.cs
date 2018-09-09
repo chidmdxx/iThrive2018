@@ -51,6 +51,7 @@ public abstract class Window : MonoBehaviour, IPointerDownHandler, IDragHandler
     public void Select()
     {
         this.IsCurrentWindow = true;
+        this.gameObject.transform.SetAsLastSibling();
     }
 
     public void UnSelect()
@@ -66,6 +67,7 @@ public abstract class Window : MonoBehaviour, IPointerDownHandler, IDragHandler
     public void Open()
     {
         SoundManager.Instance.PlaySingleSound("click");
+        this.Select();
         this.gameObject.SetActive(true);
     }
 
@@ -84,6 +86,8 @@ public abstract class Window : MonoBehaviour, IPointerDownHandler, IDragHandler
         this.movable = data.pointerCurrentRaycast.gameObject.name.Equals("DragZone");
         this.panelRectTransform.SetAsLastSibling();
         RectTransformUtility.ScreenPointToLocalPointInRectangle(panelRectTransform, data.position, data.pressEventCamera, out pointerOffset);
+
+        this.Select();
     }
 
     public void OnDrag(PointerEventData data)
