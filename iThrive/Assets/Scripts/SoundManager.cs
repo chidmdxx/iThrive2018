@@ -23,16 +23,8 @@ public class SoundManager : MonoBehaviour
     public AudioClip[] sounds;
 
     private int listIndex;
-    //private bool listPlaying = false;
     private float currentClipTime;
-
-    //private float fadeSpeed = 8;
     private float musicFadeSpeed = 2;
-    private float characterMusicFadeSpeed = 1;
-
-    private float musicMinVolume = .7f;
-    private float characterMusicMinVolume = .5f;
-
 
     public float masterVolume = 1f;
     private Dictionary<AudioSource, float> volumes = new Dictionary<AudioSource, float>();
@@ -103,6 +95,18 @@ public class SoundManager : MonoBehaviour
         this._musicSource.loop = true;
         this.UpdateVolume(_musicSource);
         this._musicSource.Play();
+    }
+
+    public void ToggleMusic()
+    {
+        if (this._musicSource.isPlaying)
+        {
+            this._musicSource.Pause();
+        }
+        else
+        {
+            this._musicSource.UnPause();
+        }
     }
 
     public void GoToPark()

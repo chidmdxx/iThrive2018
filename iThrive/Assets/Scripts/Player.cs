@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Player : MonoBehaviour {
     public static double TimeElapsed { get; set; }
-    public static float Energy { get; set; }
+    public static double Energy { get; private set; }
     public static Dictionary<string, int> LastInteractions { get; private set; }
     public static GameFlags Flags { get; set; }
 
@@ -30,9 +30,24 @@ public class Player : MonoBehaviour {
 
     public static void Initialize()
     {
-        Player.TimeElapsed = 0f;
+        Player.TimeElapsed = 0;
         Player.Energy = 100;
         Player.Flags = GameFlags.None;
         Player.LastInteractions = new Dictionary<string, int>();
+    }
+
+    public static void ModifyEnergy(double modifier)
+    {
+        Player.Energy += modifier;
+
+        if (Player.Energy > 100)
+        {
+            Player.Energy = 100;
+        }
+
+        if (Player.Energy < 0)
+        {
+            Player.Energy = 0;
+        }
     }
 }

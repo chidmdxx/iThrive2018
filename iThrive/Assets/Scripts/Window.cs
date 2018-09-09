@@ -11,6 +11,7 @@ public abstract class Window : MonoBehaviour, IPointerDownHandler, IDragHandler
     public Button CloseButton { get; set; }
     protected virtual Action OnStart { get; set; }
     protected virtual Action OnUpdate { get; set; }
+    protected virtual Action OnClose { get; set; }
 
     private bool movable;
     private Vector2 pointerOffset;
@@ -20,10 +21,14 @@ public abstract class Window : MonoBehaviour, IPointerDownHandler, IDragHandler
     // Use this for initialization
     void Start ()
     {
-        this.OnStart();
+        if (this.OnStart != null)
+        {
+            this.OnStart();
+        }
+
         var buttons = this.GetComponentsInChildren<Button>();
         this.CloseButton = buttons.First(field => field.name.Equals("CloseButton"));
-        this.CloseButton.onClick.AddListener(Close);
+        this.CloseButton.onClick.AddListener(this.Close);
 
         var canvas = GetComponentInParent<Canvas>();
         if (canvas != null)
@@ -36,7 +41,7 @@ public abstract class Window : MonoBehaviour, IPointerDownHandler, IDragHandler
 	// Update is called once per frame
 	void Update ()
     {
-		if (this.IsCurrentWindow)
+		if (this.IsCurrentWindow && this.OnUpdate != null)
         {
             this.OnUpdate();
         }
@@ -60,6 +65,10 @@ public abstract class Window : MonoBehaviour, IPointerDownHandler, IDragHandler
     public void Close()
     {
         SoundManager.Instance.PlaySingleSound("click");
+        if (this.OnClose != null)
+        {
+            this.OnClose();
+        }
         UnityEngine.Object.Destroy(this.gameObject);
     }
 
