@@ -8,6 +8,7 @@ public class EventManager : MonoBehaviour {
 
     public static EventManager Instance;
     private Queue<TimeBasedEvent> TimeEventQueue { get; set; }
+    private Queue<FlagBasedEvent> FlagEventQueue { get; set; }
 
 
     void Awake () {
@@ -26,11 +27,13 @@ public class EventManager : MonoBehaviour {
 
         this.InitializeQueue();
         this.StartCoroutine(this.TimeEventQueueCheck());
+        this.StartCoroutine(this.FlagEventQueueCheck());
     }
 
     void InitializeQueue()
     {
         this.TimeEventQueue = new Queue<TimeBasedEvent>();
+        this.FlagEventQueue = new Queue<FlagBasedEvent>();
     }
 
     IEnumerator TimeEventQueueCheck()
@@ -55,6 +58,28 @@ public class EventManager : MonoBehaviour {
         }
     }
 
+    IEnumerator FlagEventQueueCheck()
+    {
+        while (true)
+        {
+            if (this.FlagEventQueue.Count > 0)
+            {
+                var flagEvent = this.FlagEventQueue.Dequeue();
+
+                if ((Player.Flags & flagEvent.requiredFlags) != 0)
+                {
+                    flagEvent.Event();
+                }
+                else
+                {
+                    this.FlagEventQueue.Enqueue(flagEvent);
+                }
+            }
+
+            yield return new WaitForFixedUpdate();
+        }
+    }
+
     public void AddNewTimeEvent(string startTime, Action evenctAction)
     {
         this.AddNewTimeEvent(new TimeBasedEvent { StartTime = DateTime.Parse(startTime), Event = evenctAction });
@@ -68,5 +93,15 @@ public class EventManager : MonoBehaviour {
     public void AddNewTimeEvent(TimeBasedEvent timeEvent)
     {
         this.TimeEventQueue.Enqueue(timeEvent);
+    }
+
+    public void AddNewFlagEvent(GameFlags flags, Action eventAction)
+    {
+        this.FlagEventQueue.Enqueue(new FlagBasedEvent { requiredFlags = flags, Event = eventAction });
+    }
+
+    public void AddNewFlagEvent(FlagBasedEvent timeEvent)
+    {
+        this.FlagEventQueue.Enqueue(timeEvent);
     }
 }

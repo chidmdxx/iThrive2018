@@ -8,7 +8,7 @@ public class Player : MonoBehaviour {
     public static double TimeElapsed { get; private set; }
     public static double Energy { get; private set; }
     public static Dictionary<string, int> LastInteractions { get; private set; }
-    public static GameFlags Flags { get; set; }
+    public static GameFlags Flags { get; private set; }
 
     private static double TimeSpeed { get; set; }
     private static readonly DateTime gameStartTime = DateTime.Parse("8:00 AM");
@@ -40,7 +40,7 @@ public class Player : MonoBehaviour {
         Player.TimeElapsed = 0;
         Player.SetTimeToNormal();
         Player.Energy = 100;
-        Player.Flags = GameFlags.None;
+        Player.Flags &= GameFlags.None;
         Player.LastInteractions = new Dictionary<string, int>();
     }
 
@@ -83,5 +83,10 @@ public class Player : MonoBehaviour {
 
         var elapsedTime = TimeSpan.FromTicks(Convert.ToInt64(Player.gameTimespan.Ticks * Player.TimeElapsed / 100));
         return Player.gameStartTime.Add(elapsedTime);
+    }
+
+    public static void AwardFlag(GameFlags flag)
+    {
+        Player.Flags |= flag;
     }
 }
