@@ -1,4 +1,5 @@
 ﻿using Assets.Scripts.Definitions;
+using Assets.Scripts.Events;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -33,6 +34,9 @@ public class EventManager : MonoBehaviour {
     {
         this.TimeEventQueue = new Queue<TimeBasedEvent>();
         this.FlagEventQueue = new Queue<FlagBasedEvent>();
+
+        this.AddNewTimeEvent(Events.ConnieAtNine);
+        this.AddNewTimeEvent(Events.FrankAtOne);
     }
 
     void StartEventReading()
