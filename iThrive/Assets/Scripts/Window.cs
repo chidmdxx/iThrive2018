@@ -59,6 +59,7 @@ public abstract class Window : MonoBehaviour, IPointerDownHandler, IDragHandler
 
     public void Close()
     {
+        SoundManager.Instance.PlaySingleSound("click");
         UnityEngine.Object.Destroy(this.gameObject);
     }
 
