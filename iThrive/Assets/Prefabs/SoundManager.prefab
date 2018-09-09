@@ -362,4 +362,5 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 76de49da8bbb65c4caf0e860c8aa21dc, type: 3}
   - {fileID: 8300000, guid: 99f08e77c3e259c47b77e3b74451a0f2, type: 3}
   - {fileID: 8300000, guid: 30a94e8f3549b164bb8c0b0ae4a4070b, type: 3}
+  - {fileID: 8300000, guid: d344c6b8e93aaa44ebec4726f551b31c, type: 3}
   masterVolume: 1
