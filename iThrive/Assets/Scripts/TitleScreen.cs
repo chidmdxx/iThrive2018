@@ -23,7 +23,6 @@ public class TitleScreen : MonoBehaviour {
         {
             //Pause game
             pauseUI.SetActive(true);
-            Player.PauseTime();
         }
 	}
 
@@ -34,7 +33,7 @@ public class TitleScreen : MonoBehaviour {
     public void Resume()
     {
         pauseUI.SetActive(false);
-        Player.SetTimeToNormal();
+        //Change time back to normal
     }
     public void MainMenu()
     {
