@@ -26,14 +26,24 @@ public class EventManager : MonoBehaviour {
         UnityEngine.Object.DontDestroyOnLoad(this.gameObject);
 
         this.InitializeQueue();
-        this.StartCoroutine(this.TimeEventQueueCheck());
-        this.StartCoroutine(this.FlagEventQueueCheck());
+        this.StartEventReading();
     }
 
     void InitializeQueue()
     {
         this.TimeEventQueue = new Queue<TimeBasedEvent>();
         this.FlagEventQueue = new Queue<FlagBasedEvent>();
+    }
+
+    void StartEventReading()
+    {
+        this.StartCoroutine(this.TimeEventQueueCheck());
+        this.StartCoroutine(this.FlagEventQueueCheck());
+    }
+
+    void PauseEventReading()
+    {
+        this.StopAllCoroutines();
     }
 
     IEnumerator TimeEventQueueCheck()
