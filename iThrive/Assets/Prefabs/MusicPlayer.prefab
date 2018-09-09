@@ -475,6 +475,11 @@ MonoBehaviour:
   metalButton: {fileID: 114514918002980950}
   playButton: {fileID: 114454521747474704}
   AlbumArt: {fileID: 114990742420894756}
+  happySprite: {fileID: 21300000, guid: 01fe19b4626335040ac08050339afbc9, type: 3}
+  sadSprite: {fileID: 21300000, guid: e1707c5102c28b74ba0d5c1d2fb5834e, type: 3}
+  relaxSprite: {fileID: 21300000, guid: 8fc4202c65b0e7142bed8da88c4ee400, type: 3}
+  metalSprite: {fileID: 21300000, guid: 54c207b90e1c3b24f83cee7511f7864e, type: 3}
+  blankSprite: {fileID: 21300000, guid: 97ab9986ea31f2b4fbf4bdd477a15695, type: 3}
 --- !u!114 &114325698710127456
 MonoBehaviour:
   m_ObjectHideFlags: 1
