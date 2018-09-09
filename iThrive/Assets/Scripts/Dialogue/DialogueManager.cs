@@ -5,7 +5,11 @@ using UnityEngine.UI;
 public class DialogueManager : MonoBehaviour
 {
 
-    public Text dialogueText;
+    public Text dialogueTheirsText;
+    public Text dialogueMineText;
+    public Text option1Text;
+    public Text option2Text;
+    public Text option3Text;
 
     private Queue<string> sentenceQueue;
 
@@ -25,7 +29,12 @@ public class DialogueManager : MonoBehaviour
             return;
         }
 
-        dialogueText.text = sentenceQueue.Dequeue();
+        string currentSetnence = sentenceQueue.Dequeue();
+        dialogueTheirsText.text = currentSetnence;
+        dialogueMineText.text = "Howdy!";
+        option1Text.text = "Hell yes";
+        option2Text.text = "Over my dead body!";
+        option3Text.text = "Mebbeh";
     }
 
     void EndDialogue()
