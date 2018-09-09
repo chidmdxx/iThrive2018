@@ -52,19 +52,10 @@ public class Dialogue {
         theirText = "Hey, want to grab tea?",
         myText = "",
         reply1 = "Yes tea",
-        reply2 = "No tea",
+        reply2 = "",
         option1 = new Dialogue
         {
             theirText = "Cool tea!",
-            myText = "",
-            reply1 = "",
-            reply2 = "",
-            option1 = null,
-            option2 = null
-        },
-        option2 = new Dialogue
-        {
-            theirText = "Bummer tea",
             myText = "",
             reply1 = "",
             reply2 = "",

@@ -146,7 +146,13 @@ public class DialogueManager : MonoBehaviour
 
         dialogueTheirsRecentText.text = dialogue.theirText;
         option1Text.text = dialogue.reply1;
-        option2Text.text = dialogue.reply2;
+
+        if (dialogue.reply2.Equals("")){
+            option2Button.gameObject.SetActive(false);
+        }
+        else {
+            option2Text.text = dialogue.reply2;
+        }
         replyText.text = "";
         conversationMineOld.gameObject.SetActive(true);
         nextOption = -1;
@@ -243,7 +249,14 @@ public class DialogueManager : MonoBehaviour
         }
 
         option1Button.gameObject.SetActive(true);
-        option2Button.gameObject.SetActive(true);
+        if (dialogue.reply2.Equals(""))
+        {
+            option2Button.gameObject.SetActive(false);
+        }
+        else {
+            option2Button.gameObject.SetActive(true);
+
+        }
         option1Text.text = dialogue.reply1;
         option2Text.text = dialogue.reply2;
         conversationMineRecent.gameObject.SetActive(false);
