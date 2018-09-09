@@ -8,6 +8,10 @@ public class Desktop : MonoBehaviour {
 
     public GameObject windowTemplate;
     public GameObject TaskBarPanel;
+    public GameObject bubble;
+    public GameObject speech;
+    Queue<string> outsideDialog;
+
     float clickTime=0f,interval=0.5f;
     bool clicked = false;
     public GameObject[] tbIcons;
@@ -15,12 +19,29 @@ public class Desktop : MonoBehaviour {
     // Use this for initialization
     void Start () {
         soundManager = FindObjectOfType<SoundManager>();
+        bubble.SetActive(false);
+        speech.SetActive(false);
+        outsideDialog = new Queue<string>();
 	}
 	
 	// Update is called once per frame
 	void Update () {
 
     }
+
+    void DisplayBubble(string text)
+    {
+        // Thought bubble for player
+        bubble.SetActive(true);
+        bubble.GetComponentInChildren<Text>().text = text;
+    }
+    void DisplaySpeech(string text)
+    {
+        // Speech bubble for oustide characters like mom
+        speech.SetActive(true);
+        speech.GetComponentInChildren<Text>().text = text;
+    }
+
     void ResetTBIcons()
     {
         tbIcons = GameObject.FindGameObjectsWithTag("TBIcon");
@@ -53,10 +74,24 @@ public class Desktop : MonoBehaviour {
             clickTime = Time.time;
         }
     }
+    public void AdvanceDialog()
+    {
+        GameObject currObj = EventSystem.current.currentSelectedGameObject;
+        if(outsideDialog.Count > 0)
+        {
+            currObj.GetComponentInChildren<Text>().text = outsideDialog.Dequeue();
+        }
+        else
+        {
+            //Close the dialog bubble
+            currObj.SetActive(false);
+        }
+    }
     public void ClickTBIcon()
     {
         Debug.Log("clicked tbicon");
         ResetTBIcons();
+        DisplaySpeech("hi");
         EventSystem.current.currentSelectedGameObject.GetComponent<Button>().interactable = false;
     }
 }
