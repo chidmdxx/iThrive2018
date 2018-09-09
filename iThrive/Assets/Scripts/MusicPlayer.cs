@@ -15,6 +15,43 @@ public class MusicPlayer : Window {
     public Button metalButton;
     public Button playButton;
     public Image AlbumArt;
+    public Sprite happySprite;
+    public Sprite sadSprite;
+    public Sprite relaxSprite;
+    public Sprite metalSprite;
+    public Sprite blankSprite;
+
+    private static string HappyText
+    {
+        get
+        {
+            return MusicPlayer.SongInfoBuilder("Sparkling blimp", "Super happy squad", "Ultimate happy time 2");
+        }
+    }
+
+    private static string SadText
+    {
+        get
+        {
+            return MusicPlayer.SongInfoBuilder("Grief-striken serenade", "No more hope clan", "Saddest of times");
+        }
+    }
+
+    private static string RelaxText
+    {
+        get
+        {
+            return MusicPlayer.SongInfoBuilder("Coffee shop quartet", "Elevator riders", "Music for those quiet times");
+        }
+    }
+
+    private static string MetalText
+    {
+        get
+        {
+            return MusicPlayer.SongInfoBuilder("Carnage by words", "Death panda attack", "The apocalypse is now, I swear it guys");
+        }
+    }
 
     private MusicPlaying MusicPlaying { get; set; }
     private float timer;
@@ -26,6 +63,7 @@ public class MusicPlayer : Window {
             return () =>
             {
                 this.MusicPlaying = MusicPlaying.None;
+                this.AlbumArt.sprite = this.blankSprite;
                 this.IsCurrentWindow = true;
                 this.happyButton.onClick.AddListener(() => this.ButtonClick(this.HappyButtonClick));
                 this.sadButton.onClick.AddListener(() => this.ButtonClick(this.SadButtonClick));
@@ -40,7 +78,13 @@ public class MusicPlayer : Window {
     {
         get
         {
-            return SoundManager.Instance.GoToHome;
+            return () =>
+            {
+                this.MusicPlaying = MusicPlaying.None;
+                this.AlbumArt.sprite = this.blankSprite;
+                this.musicInfo.text = string.Empty;
+                SoundManager.Instance.GoToHome();
+            };
         }
     }
 
@@ -99,56 +143,44 @@ public class MusicPlayer : Window {
     private void HappyButtonClick()
     {
         SoundManager.Instance.PlayHappyMusic();
-        var stringBuilder = new StringBuilder();
-        stringBuilder.AppendLine("Sparkling blimp");
-        stringBuilder.AppendLine();
-        stringBuilder.AppendLine("Super happy squad");
-        stringBuilder.AppendLine();
-        stringBuilder.AppendLine("Ultimate happy time 2");
-
-        this.musicInfo.text = stringBuilder.ToString();
+        this.musicInfo.text = MusicPlayer.HappyText;
+        this.AlbumArt.sprite = this.happySprite;
         this.MusicPlaying = MusicPlaying.Happy;
     }
 
     private void SadButtonClick()
     {
         SoundManager.Instance.PlaySadMusic();
-        var stringBuilder = new StringBuilder();
-        stringBuilder.AppendLine("Grief-striken serenade");
-        stringBuilder.AppendLine();
-        stringBuilder.AppendLine("No more hope clan");
-        stringBuilder.AppendLine();
-        stringBuilder.AppendLine("Saddest of times");
-
-        this.musicInfo.text = stringBuilder.ToString();
+        this.musicInfo.text = MusicPlayer.SadText;
+        this.AlbumArt.sprite = this.sadSprite;
         this.MusicPlaying = MusicPlaying.Sad;
     }
 
     private void RelaxButtonClick()
     {
         SoundManager.Instance.PlaySadMusic();
-        var stringBuilder = new StringBuilder();
-        stringBuilder.AppendLine("Coffee shop quartet");
-        stringBuilder.AppendLine();
-        stringBuilder.AppendLine("Elevator riders");
-        stringBuilder.AppendLine();
-        stringBuilder.AppendLine("Music for those quiet times");
-
-        this.musicInfo.text = stringBuilder.ToString();
+        this.musicInfo.text = MusicPlayer.RelaxText;
+        this.AlbumArt.sprite = this.relaxSprite;
         this.MusicPlaying = MusicPlaying.Relax;
     }
 
     private void MetalButtonClick()
     {
         SoundManager.Instance.PlayMetalMusic();
-        var stringBuilder = new StringBuilder();
-        stringBuilder.AppendLine("Carnage by words");
-        stringBuilder.AppendLine();
-        stringBuilder.AppendLine("Death panda attack");
-        stringBuilder.AppendLine();
-        stringBuilder.AppendLine("The apocalypse is now, I swear it guys");
-
-        this.musicInfo.text = stringBuilder.ToString();
+        this.musicInfo.text = MusicPlayer.MetalText;
+        this.AlbumArt.sprite = this.metalSprite;
         this.MusicPlaying = MusicPlaying.Metal;
+    }
+
+    private static string SongInfoBuilder(string songName, string bandName, string albumName)
+    {
+        var stringBuilder = new StringBuilder();
+        stringBuilder.AppendLine(songName);
+        stringBuilder.AppendLine();
+        stringBuilder.AppendLine(bandName);
+        stringBuilder.AppendLine();
+        stringBuilder.AppendLine(albumName);
+
+        return stringBuilder.ToString();
     }
 }
