@@ -28,8 +28,14 @@ public abstract class Window : MonoBehaviour, IPointerDownHandler, IDragHandler
         }
 
         var buttons = this.GetComponentsInChildren<Button>();
-        this.CloseButton = buttons.First(field => field.name.Equals("CloseButton"));
-        this.CloseButton.onClick.AddListener(this.Close);
+        if (buttons.Any())
+        {
+            this.CloseButton = buttons.FirstOrDefault(field => field.name.Equals("CloseButton"));
+            if (this.CloseButton != null)
+            {
+                this.CloseButton.onClick.AddListener(this.Close);
+            }
+        }
 
         var canvas = GetComponentInParent<Canvas>();
         if (canvas != null)
