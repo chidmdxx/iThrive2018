@@ -15,25 +15,28 @@ public class TitleScreen : MonoBehaviour {
 	void Start () {
         chairRoll = blackScreen.gameObject.GetComponent<AudioSource>();
         blackScreen.canvasRenderer.SetAlpha(0.0f);
-	}
-	
-	// Update is called once per frame
-	void Update () {
+        Player.PauseTime();
+    }
+
+    // Update is called once per frame
+    void Update () {
 		if (Input.GetKeyDown(KeyCode.Escape) && deskUI.active)
         {
             //Pause game
             pauseUI.SetActive(true);
+            Player.PauseTime();
         }
 	}
 
     public void Play() {
         titleUI.SetActive(false);
         StartCoroutine(Fade(deskUI));
+        Player.SetTimeToNormal();
     }
     public void Resume()
     {
         pauseUI.SetActive(false);
-        //Change time back to normal
+        Player.SetTimeToNormal();
     }
     public void MainMenu()
     {

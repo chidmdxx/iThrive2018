@@ -5,10 +5,6 @@ using UnityEngine.UI;
 public class Clock : Window {
 
     public static readonly string WindowName = "ClockWindow";
-
-    private static readonly DateTime gameStartTime = DateTime.Parse("8:00 AM");
-    private static readonly DateTime gameEndTime = DateTime.Parse("11:59 PM");
-    private static readonly TimeSpan gameTimespan = gameEndTime.Subtract(gameStartTime);
     private Text clockText;
 
     protected override Action OnStart
@@ -30,19 +26,8 @@ public class Clock : Window {
         {
             return () =>
             {
-                this.clockText.text = this.GetCurrentGameTime();
+                this.clockText.text = Player.GetCurrentGameTime().ToString("hh:mm tt");
             };
         }
-    }
-
-    private string GetCurrentGameTime()
-    {
-        if (Player.TimeElapsed >= 100)
-        {
-            return Clock.gameEndTime.AddMinutes(1).ToString("hh:mm tt");
-        }
-
-        var elapsedTime = TimeSpan.FromTicks(Convert.ToInt64(Clock.gameTimespan.Ticks * Player.TimeElapsed / 100));
-        return Clock.gameStartTime.Add(elapsedTime).ToString("hh:mm tt");
     }
 }

@@ -118,37 +118,37 @@ public class SoundManager : MonoBehaviour
     public void GoToCoffee()
     {
         this.StopAllCoroutines();
-        this.StartCoroutine(FadeTo(this._musicSource, this.coffeeMusic, this.musicFadeSpeed));
+        this.StartCoroutine(this.FadeTo(this._musicSource, this.coffeeMusic, this.musicFadeSpeed));
     }
 
     public void GoToHome()
     {
         this.StopAllCoroutines();
-        this.StartCoroutine(FadeTo(this._musicSource, this.houseMusic, this.musicFadeSpeed));
+        this.StartCoroutine(this.FadeTo(this._musicSource, this.houseMusic, this.musicFadeSpeed));
     }
 
     public void PlaySadMusic()
     {
         this.StopAllCoroutines();
-        this.StartCoroutine(FadeTo(this._musicSource, this.sadMusic, this.musicFadeSpeed));
+        this.StartCoroutine(this.FadeTo(this._musicSource, this.sadMusic, this.musicFadeSpeed));
     }
 
     public void PlayHappyMusic()
     {
         this.StopAllCoroutines();
-        this.StartCoroutine(FadeTo(this._musicSource, this.happyMusic, this.musicFadeSpeed));
+        this.StartCoroutine(this.FadeTo(this._musicSource, this.happyMusic, this.musicFadeSpeed));
     }
 
     public void PlayRelaxingMusic()
     {
         this.StopAllCoroutines();
-        this.StartCoroutine(FadeTo(this._musicSource, this.relaxingMusic, this.musicFadeSpeed));
+        this.StartCoroutine(this.FadeTo(this._musicSource, this.relaxingMusic, this.musicFadeSpeed));
     }
 
     public void PlayMetalMusic()
     {
         this.StopAllCoroutines();
-        this.StartCoroutine(FadeTo(this._musicSource, this.metalMusic, this.musicFadeSpeed));
+        this.StartCoroutine(this.FadeTo(this._musicSource, this.metalMusic, this.musicFadeSpeed));
     }
 
     IEnumerator FadeUp(AudioSource source, float fadeTo, float speed)
