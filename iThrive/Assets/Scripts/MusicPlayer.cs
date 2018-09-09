@@ -69,7 +69,7 @@ public class MusicPlayer : Window {
                 this.sadButton.onClick.AddListener(() => this.ButtonClick(this.SadButtonClick));
                 this.relaxButton.onClick.AddListener(() => this.ButtonClick(this.RelaxButtonClick));
                 this.metalButton.onClick.AddListener(() => this.ButtonClick(this.MetalButtonClick));
-                this.playButton.onClick.AddListener(() => this.ButtonClick(SoundManager.Instance.ToggleMusic));
+                this.playButton.onClick.AddListener(() => this.ButtonClick(this.PauseButtonClick));
             };
         }
     }
@@ -80,10 +80,14 @@ public class MusicPlayer : Window {
         {
             return () =>
             {
+                if (this.MusicPlaying != MusicPlaying.None)
+                {
+                    SoundManager.Instance.GoToHome();
+                }
+
                 this.MusicPlaying = MusicPlaying.None;
                 this.AlbumArt.sprite = this.blankSprite;
                 this.musicInfo.text = string.Empty;
-                SoundManager.Instance.GoToHome();
             };
         }
     }
@@ -170,6 +174,14 @@ public class MusicPlayer : Window {
         this.musicInfo.text = MusicPlayer.MetalText;
         this.AlbumArt.sprite = this.metalSprite;
         this.MusicPlaying = MusicPlaying.Metal;
+    }
+
+    private void PauseButtonClick()
+    {
+        if (this.MusicPlaying != MusicPlaying.None)
+        {
+            SoundManager.Instance.ToggleMusic();
+        }
     }
 
     private static string SongInfoBuilder(string songName, string bandName, string albumName)
