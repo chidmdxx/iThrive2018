@@ -7,10 +7,11 @@ public class TitleScreen : MonoBehaviour {
     public GameObject titleUI;
     public GameObject playUI;
     public Image blackScreen;
+    private AudioSource chairRoll;
 
 	// Use this for initialization
 	void Start () {
-
+        chairRoll = blackScreen.gameObject.GetComponent<AudioSource>();
         blackScreen.canvasRenderer.SetAlpha(0.0f);
 	}
 	
@@ -22,8 +23,7 @@ public class TitleScreen : MonoBehaviour {
     public void Play() {
         Debug.Log("Transition to play cutscene");
         titleUI.SetActive(false);
-        StartCoroutine(fade(playUI));
-        //playUI.SetActive(true);
+        StartCoroutine(Fade(playUI));
     }
     public void HTP()
     {
@@ -34,17 +34,19 @@ public class TitleScreen : MonoBehaviour {
         Application.Quit();
         Debug.Break();
     }
-    IEnumerator fade(GameObject sceneUI)
+    IEnumerator Fade(GameObject sceneUI)
     {
-        blackScreen.CrossFadeAlpha(1f, 2f, true);      
+        blackScreen.CrossFadeAlpha(1.0f, 2f, true);
         yield return new WaitForSeconds(2f);
-        blackScreen.CrossFadeAlpha(0f, 1f, true);
+        //Play chair rolling back audio clip
+        chairRoll.Play();
+        blackScreen.CrossFadeAlpha(0.0f, 1f, true);
         yield return new WaitForSeconds(1f);
         sceneUI.SetActive(true);
     }
-    public void goBack()
+    public void GoBack()
     {
         playUI.SetActive(false);
-        StartCoroutine(fade(titleUI));
+        StartCoroutine(Fade(titleUI));
     }
 }
