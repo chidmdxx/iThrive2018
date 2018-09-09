@@ -48,7 +48,7 @@ public class SoundManager : MonoBehaviour
         this.volumes.Add(_soundSource, 1f);
         this.volumes.Add(_dialogSource, 1f);
         this.volumes.Add(_musicSource, 1f);
-        this.PlayMusic();
+        //this.PlayMusic();
     }
 
     public void PlaySingleSound(string clipSubstring)
