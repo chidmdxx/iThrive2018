@@ -22,6 +22,8 @@ public class Desktop : MonoBehaviour {
         bubble.SetActive(false);
         speech.SetActive(false);
         outsideDialog = new Queue<string>();
+        outsideDialog.Enqueue("Hi");
+        outsideDialog.Enqueue("Bye");
 	}
 	
 	// Update is called once per frame
@@ -87,11 +89,16 @@ public class Desktop : MonoBehaviour {
             currObj.SetActive(false);
         }
     }
+
+    /*
+     * First choose to activate bubble or speech by doing either DisplaySpeech or DisplayBubble and the first item of the queue
+     * Then use AdvanceDialog() which will keep feeding the queue of dialogs to the already active bubble or speech
+     * */
+
     public void ClickTBIcon()
     {
-        Debug.Log("clicked tbicon");
         ResetTBIcons();
-        DisplaySpeech("hi");
+        DisplaySpeech(outsideDialog.Dequeue());
         EventSystem.current.currentSelectedGameObject.GetComponent<Button>().interactable = false;
     }
 }
