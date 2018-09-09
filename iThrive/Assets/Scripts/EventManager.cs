@@ -7,7 +7,7 @@ using UnityEngine;
 public class EventManager : MonoBehaviour {
 
     public static EventManager Instance;
-    private Queue<TimeBasedEvent> EventQueue { get; set; }
+    private Queue<TimeBasedEvent> TimeEventQueue { get; set; }
 
 
     void Awake () {
@@ -25,21 +25,21 @@ public class EventManager : MonoBehaviour {
         UnityEngine.Object.DontDestroyOnLoad(this.gameObject);
 
         this.InitializeQueue();
-        this.StartCoroutine(this.EventQueueCheck());
+        this.StartCoroutine(this.TimeEventQueueCheck());
     }
 
     void InitializeQueue()
     {
-        this.EventQueue = new Queue<TimeBasedEvent>();
+        this.TimeEventQueue = new Queue<TimeBasedEvent>();
     }
 
-    IEnumerator EventQueueCheck()
+    IEnumerator TimeEventQueueCheck()
     {
         while (true)
         {
-            if (this.EventQueue.Count > 0)
+            if (this.TimeEventQueue.Count > 0)
             {
-                var timeEvent = this.EventQueue.Dequeue();
+                var timeEvent = this.TimeEventQueue.Dequeue();
 
                 if (Player.GetCurrentGameTime() > timeEvent.StartTime)
                 {
@@ -47,7 +47,7 @@ public class EventManager : MonoBehaviour {
                 }
                 else
                 {
-                    this.EventQueue.Enqueue(timeEvent);
+                    this.TimeEventQueue.Enqueue(timeEvent);
                 }
             }
 
@@ -55,18 +55,18 @@ public class EventManager : MonoBehaviour {
         }
     }
 
-    public void AddNewEvent(string startTime, Action evenctAction)
+    public void AddNewTimeEvent(string startTime, Action evenctAction)
     {
-        this.AddNewEvent(new TimeBasedEvent { StartTime = DateTime.Parse(startTime), Event = evenctAction });
+        this.AddNewTimeEvent(new TimeBasedEvent { StartTime = DateTime.Parse(startTime), Event = evenctAction });
     }
 
-    public void AddNewEvent(DateTime startTime, Action evenctAction)
+    public void AddNewTimeEvent(DateTime startTime, Action evenctAction)
     {
-        this.AddNewEvent(new TimeBasedEvent { StartTime = startTime, Event = evenctAction });
+        this.AddNewTimeEvent(new TimeBasedEvent { StartTime = startTime, Event = evenctAction });
     }
 
-    public void AddNewEvent(TimeBasedEvent timeEvent)
+    public void AddNewTimeEvent(TimeBasedEvent timeEvent)
     {
-        this.EventQueue.Enqueue(timeEvent);
+        this.TimeEventQueue.Enqueue(timeEvent);
     }
 }

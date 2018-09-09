@@ -2,9 +2,9 @@
 
 namespace Assets.Scripts.Definitions
 {
-    public class TimeBasedEvent
+    public class FlagBasedEvent
     {
-        public DateTime StartTime { get; set; }
+        public GameFlags requiredFlags { get; set; }
         public Action Event { get; set; }
     }
 }
