@@ -10,7 +10,6 @@ public class Clock : Window {
     private static readonly DateTime gameEndTime = DateTime.Parse("11:59 PM");
     private static readonly TimeSpan gameTimespan = gameEndTime.Subtract(gameStartTime);
     private Text clockText;
-    private Button closeButton;
 
     protected override Action OnStart
     {
