@@ -53,7 +53,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -148,7 +148,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -243,7 +243,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -344,7 +344,7 @@ MonoBehaviour:
   _musicSource: {fileID: 82416872724390188}
   parkMusic: {fileID: 8300000, guid: 002bfc14fe0ba394a9ebc1d8f03a855c, type: 3}
   coffeeMusic: {fileID: 8300000, guid: 72dd047c901f19e4ab40cb7c8cd96768, type: 3}
-  houseMusic: {fileID: 8300000, guid: 72dd047c901f19e4ab40cb7c8cd96768, type: 3}
+  houseMusic: {fileID: 8300000, guid: abcd2af06b4d6a447a99a6a09666b06a, type: 3}
   metalMusic: {fileID: 8300000, guid: 52099df707de8c24eaadeb40f9b14ef4, type: 3}
   sadMusic: {fileID: 8300000, guid: e685b400a0fcb564781fbcd7b46ed442, type: 3}
   happyMusic: {fileID: 8300000, guid: 8235899a991238f43ac863c06da0d5fd, type: 3}
@@ -362,5 +362,5 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 76de49da8bbb65c4caf0e860c8aa21dc, type: 3}
   - {fileID: 8300000, guid: 99f08e77c3e259c47b77e3b74451a0f2, type: 3}
   - {fileID: 8300000, guid: 30a94e8f3549b164bb8c0b0ae4a4070b, type: 3}
-  - {fileID: 8300000, guid: d344c6b8e93aaa44ebec4726f551b31c, type: 3}
+  - {fileID: 0}
   masterVolume: 1

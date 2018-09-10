@@ -10,7 +10,9 @@ public class Desktop : MonoBehaviour {
     public GameObject TaskBarPanel;
     public GameObject bubble;
     public GameObject speech;
-    Queue<string> outsideDialog;
+    static Queue<string> outsideDialog;
+
+    public static Desktop desktop;
 
     float clickTime=0f,interval=0.5f;
     bool clicked = false;
@@ -19,6 +21,7 @@ public class Desktop : MonoBehaviour {
     // Use this for initialization
     void Start () {
         soundManager = FindObjectOfType<SoundManager>();
+        desktop = FindObjectOfType<Desktop>();
         bubble.SetActive(false);
         speech.SetActive(false);
         outsideDialog = new Queue<string>();
@@ -30,18 +33,26 @@ public class Desktop : MonoBehaviour {
 	void Update () {
 
     }
-
-    void DisplayBubble(string text)
+    public static void Disp(Queue<string> text, bool bubblebool)
     {
+        outsideDialog = text;
+        if (bubblebool)
+            desktop.DisplayBubble();
+        else
+            desktop.DisplaySpeech();
+    }
+    void DisplayBubble()
+    {
+        
         // Thought bubble for player
         bubble.SetActive(true);
-        bubble.GetComponentInChildren<Text>().text = text;
+        bubble.GetComponentInChildren<Text>().text = outsideDialog.Dequeue();
     }
-    void DisplaySpeech(string text)
+    void DisplaySpeech()
     {
         // Speech bubble for oustide characters like mom
         speech.SetActive(true);
-        speech.GetComponentInChildren<Text>().text = text;
+        speech.GetComponentInChildren<Text>().text = outsideDialog.Dequeue();
     }
 
     void ResetTBIcons()
@@ -98,7 +109,6 @@ public class Desktop : MonoBehaviour {
     public void ClickTBIcon()
     {
         ResetTBIcons();
-        DisplaySpeech(outsideDialog.Dequeue());
         EventSystem.current.currentSelectedGameObject.GetComponent<Button>().interactable = false;
     }
 }

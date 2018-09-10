@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class TitleScreen : MonoBehaviour {
     public GameObject titleUI;
     public GameObject deskUI;
+    public GameObject helpUI;
     public GameObject pauseUI;
     public Image blackScreen;
     private AudioSource chairRoll;
@@ -20,6 +21,16 @@ public class TitleScreen : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
+        if (Input.GetMouseButtonDown(0))
+        {
+            if(titleUI.active)
+            {
+                titleUI.SetActive(false);
+                StartCoroutine(Fade(deskUI));
+                Player.SetTimeToNormal();
+            }
+        }
+
 		if (Input.GetKeyDown(KeyCode.Escape) && deskUI.active)
         {
             //Pause game
