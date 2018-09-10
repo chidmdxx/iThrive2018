@@ -14,17 +14,17 @@ public class EventSequence : MonoBehaviour {
     // Use this for initialization
     void Start () {
 		eventManager = FindObjectOfType<EventManager>();
-        eventManager.AddNewEvent(DateTime.Parse("8:15 AM"), Hello);
+        eventManager.AddNewTimeEvent(DateTime.Parse("8:15 AM"), Hello);
 
 
         //eventManager.AddNewEvent(DateTime.Parse("9:00 AM"), ConnieDialog);
 
 
 
-        eventManager.AddNewEvent(DateTime.Parse("8:00 AM"), Beginning);
-        eventManager.AddNewEvent(DateTime.Parse("8:00 PM"), Intro); //IRL Bubble
-        eventManager.AddNewEvent(DateTime.Parse("10:30 AM"), MomIntro);
-        eventManager.AddNewEvent(DateTime.Parse("6:00 PM"), MomDog);
+        eventManager.AddNewTimeEvent(DateTime.Parse("8:00 AM"), Beginning);
+        eventManager.AddNewTimeEvent(DateTime.Parse("8:00 PM"), Intro); //IRL Bubble
+        eventManager.AddNewTimeEvent(DateTime.Parse("10:30 AM"), MomIntro);
+        eventManager.AddNewTimeEvent(DateTime.Parse("6:00 PM"), MomDog);
 
         //eventManager.AddNewEvent(DateTime.Parse("10:45 AM", Connie); use function to check if coffee is true IRL Bubble
 
