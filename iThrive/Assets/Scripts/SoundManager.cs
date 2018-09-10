@@ -49,6 +49,7 @@ public class SoundManager : MonoBehaviour
         this.volumes.Add(_dialogSource, 1f);
         this.volumes.Add(_musicSource, 1f);
         this.PlayMusic();
+        this.GoToHome();
     }
 
     public void PlaySingleSound(string clipSubstring)
@@ -94,7 +95,7 @@ public class SoundManager : MonoBehaviour
         this._musicSource.clip = this.houseMusic;
         this._musicSource.loop = true;
         this.UpdateVolume(_musicSource);
-        this._musicSource.Play();
+        //this._musicSource.Play();
     }
 
     public void ToggleMusic()

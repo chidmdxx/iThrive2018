@@ -344,7 +344,11 @@ MonoBehaviour:
   _musicSource: {fileID: 82416872724390188}
   parkMusic: {fileID: 8300000, guid: 002bfc14fe0ba394a9ebc1d8f03a855c, type: 3}
   coffeeMusic: {fileID: 8300000, guid: 72dd047c901f19e4ab40cb7c8cd96768, type: 3}
+<<<<<<< HEAD
   houseMusic: {fileID: 8300000, guid: abcd2af06b4d6a447a99a6a09666b06a, type: 3}
+=======
+  houseMusic: {fileID: 8300000, guid: 7fe26a4bfe29d35418e8303826c453b0, type: 3}
+>>>>>>> 55f875a25b723ac14c639b30579dac2d5b607739
   metalMusic: {fileID: 8300000, guid: 52099df707de8c24eaadeb40f9b14ef4, type: 3}
   sadMusic: {fileID: 8300000, guid: e685b400a0fcb564781fbcd7b46ed442, type: 3}
   happyMusic: {fileID: 8300000, guid: 8235899a991238f43ac863c06da0d5fd, type: 3}
