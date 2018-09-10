@@ -15,7 +15,6 @@ public class TitleScreen : MonoBehaviour {
 	void Start () {
         chairRoll = blackScreen.gameObject.GetComponent<AudioSource>();
         blackScreen.canvasRenderer.SetAlpha(0.0f);
-        Player.PauseTime();
     }
 
     // Update is called once per frame

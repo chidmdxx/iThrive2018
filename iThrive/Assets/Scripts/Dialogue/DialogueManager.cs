@@ -4,6 +4,7 @@ using UnityEngine.UI;
 
 public class DialogueManager : MonoBehaviour
 {
+    public static DialogueManager Instance;
 
     public Text dialogueTheirsRecentText;
     public Text dialogueMineOldText;
@@ -37,6 +38,17 @@ public class DialogueManager : MonoBehaviour
 
     void Start()
     {
+        if (DialogueManager.Instance == null)
+        {
+            DialogueManager.Instance = this;
+        }
+
+        if (DialogueManager.Instance != this)
+        {
+            Object.Destroy(gameObject);
+            return;
+        }
+
         currentCharacter = "Ghost";
         dialogue = Dialogue.dialogueGhost;
         dialogueConnie = Dialogue.dialogueConnie;
@@ -147,7 +159,7 @@ public class DialogueManager : MonoBehaviour
         dialogueTheirsRecentText.text = dialogue.theirText;
         option1Text.text = dialogue.reply1;
 
-        if (dialogue.reply2.Equals("")){
+        if (string.IsNullOrEmpty(dialogue.reply2)){
             option2Button.gameObject.SetActive(false);
         }
         else {
@@ -249,7 +261,7 @@ public class DialogueManager : MonoBehaviour
         }
 
         option1Button.gameObject.SetActive(true);
-        if (dialogue.reply2.Equals(""))
+        if (string.IsNullOrEmpty(dialogue.reply2))
         {
             option2Button.gameObject.SetActive(false);
         }
@@ -273,5 +285,26 @@ public class DialogueManager : MonoBehaviour
     void EndDialogue()
     {
         Debug.Log("End of conversation");
+    }
+
+    public void SetDialog(Dialogue dialogue, string character)
+    {
+        switch (character)
+        {
+            case "Ghost":
+                dialogueGhost = dialogue;
+                break;
+            case "Connie":
+                dialogueConnie = dialogue;
+                break;
+            case "Frank":
+                dialogueFrank = dialogue;
+                break;
+        }
+
+        this.SelectConversation(character);
+
+        this.gameObject.SetActive(true);
+        this.gameObject.transform.SetAsLastSibling();
     }
 }

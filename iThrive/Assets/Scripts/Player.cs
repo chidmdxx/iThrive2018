@@ -61,7 +61,7 @@ public class Player : MonoBehaviour {
 
     public static void SetTimeToNormal()
     {
-        Player.TimeSpeed = 0.1;
+        Player.TimeSpeed = 01;
     }
 
     public static void PauseTime()

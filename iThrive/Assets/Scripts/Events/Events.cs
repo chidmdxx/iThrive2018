@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using UnityEngine;
 
 namespace Assets.Scripts.Events
 {
@@ -58,13 +59,14 @@ namespace Assets.Scripts.Events
                     }
                 };
 
+                Debug.Log("Connie event");
                 DialogueManager.Instance.SetDialog(dialogue, "Connie");
             }
         };
 
         public static TimeBasedEvent FrankAtOne = new TimeBasedEvent
         {
-            StartTime = DateTime.Parse("1:30 AM"),
+            StartTime = DateTime.Parse("1:30 PM"),
             Event = () =>
             {
                 var dialogue = new Dialogue
@@ -238,7 +240,8 @@ namespace Assets.Scripts.Events
                     }
                 };
 
-                DialogueManager.Instance.SetDialog(dialogue, "Frankie");
+                Debug.Log("Frank event");
+                DialogueManager.Instance.SetDialog(dialogue, "Frank");
             }
         };
     }
