@@ -1,10 +1,12 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class DialogueManager : MonoBehaviour
 {
     public static DialogueManager Instance;
+    public RectTransform ImWidnow;
 
     public Text dialogueTheirsRecentText;
     public Text dialogueMineOldText;
@@ -47,6 +49,12 @@ public class DialogueManager : MonoBehaviour
         {
             Object.Destroy(gameObject);
             return;
+        }
+
+        var objects = this.GetComponentsInParent<RectTransform>();
+        if (objects.Any())
+        {
+            this.ImWidnow = objects.FirstOrDefault(field => field.name.Equals("IMWindow"));
         }
 
         currentCharacter = "Ghost";
@@ -304,7 +312,7 @@ public class DialogueManager : MonoBehaviour
 
         this.SelectConversation(character);
 
-        this.gameObject.SetActive(true);
-        this.gameObject.transform.SetAsLastSibling();
+        this.ImWidnow.gameObject.SetActive(true);
+        this.ImWidnow.transform.SetAsLastSibling();
     }
 }
