@@ -12,8 +12,6 @@ public class Desktop : MonoBehaviour {
     public GameObject speech;
     static Queue<string> outsideDialog;
 
-    public static Desktop desktop;
-
     float clickTime=0f,interval=0.5f;
     bool clicked = false;
     public GameObject[] tbIcons;
@@ -21,7 +19,6 @@ public class Desktop : MonoBehaviour {
     // Use this for initialization
     void Start () {
         soundManager = FindObjectOfType<SoundManager>();
-        desktop = FindObjectOfType<Desktop>();
         bubble.SetActive(false);
         speech.SetActive(false);
         outsideDialog = new Queue<string>();
@@ -33,17 +30,16 @@ public class Desktop : MonoBehaviour {
 	void Update () {
 
     }
-    public static void Disp(Queue<string> text, bool bubblebool)
+    public void Disp(Queue<string> text, bool bubblebool)
     {
         outsideDialog = text;
         if (bubblebool)
-            desktop.DisplayBubble();
+            DisplayBubble();
         else
-            desktop.DisplaySpeech();
+            DisplaySpeech();
     }
     void DisplayBubble()
     {
-        
         // Thought bubble for player
         bubble.SetActive(true);
         bubble.GetComponentInChildren<Text>().text = outsideDialog.Dequeue();

@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class EventSequence : MonoBehaviour {
 
+    private Desktop desktop;
     private EventManager eventManager;
     bool connieCoffee;
     bool dogWalk;
@@ -14,8 +15,7 @@ public class EventSequence : MonoBehaviour {
     // Use this for initialization
     void Start () {
 		eventManager = FindObjectOfType<EventManager>();
-        eventManager.AddNewTimeEvent(DateTime.Parse("8:15 AM"), Hello);
-
+        desktop = FindObjectOfType<Desktop>();
 
         //eventManager.AddNewEvent(DateTime.Parse("9:00 AM"), ConnieDialog);
 
@@ -33,10 +33,6 @@ public class EventSequence : MonoBehaviour {
         //eventManager.AddNewEvent(DateTime.Parse("6:00 PM", Mom); use function to check if dogwalk was true or false IRL Bubble
 
     }
-    void Hello()
-    {
-        Debug.Log("Hello");
-    }
     void Intro()
     {
         q.Clear();
@@ -49,7 +45,7 @@ public class EventSequence : MonoBehaviour {
         q.Enqueue("Another chance? That's oddly topical.");
         q.Enqueue("Should... should I click it?");
         q.Enqueue("Yeah, I'm clicking it.");
-        Desktop.Disp(q, true);
+        desktop.Disp(q, true);
     }
     void Beginning()
     {
@@ -62,7 +58,7 @@ public class EventSequence : MonoBehaviour {
         q.Enqueue("Today was the day he left his last message in IM...");
         q.Enqueue(" maybe this is my chance to make things right.");
         q.Enqueue("I can repair everything before he left me.");
-        Desktop.Disp(q, true);
+        desktop.Disp(q, true);
     }
     void MomIntro()
     {
@@ -76,7 +72,7 @@ public class EventSequence : MonoBehaviour {
         q.Enqueue("endearments you assign just to make me puke?");
         q.Enqueue("Mom: Just as soon as you stop making me remind you, my little casserole.");
 
-        Desktop.Disp(q, false);
+        desktop.Disp(q, false);
     }
     void MomDog()
     {
@@ -119,7 +115,7 @@ public class EventSequence : MonoBehaviour {
 
         }
 
-        Desktop.Disp(q, false);
+        desktop.Disp(q, false);
     }
 
 
